@@ -176,6 +176,12 @@ class youtubeFeed {
     }, [])
   }
 
+  _setBackgroundImages() {
+    this.querySelectorAll('.card').forEach((item, i) => {
+      item.style.backgroundImage = `url(${this._videos[i].thumb.url})`
+    })
+  }
+
   _computeVideoLink (videoId) {
     return `https://www.youtube.com/watch?v=${videoId}`
   }
@@ -191,6 +197,7 @@ class youtubeFeed {
   _videosChanged (videos) {
     if (videos.length > 0) {
       setTimeout(() => {
+        this._setBackgroundImages()
         this.dispatchEvent(new CustomEvent('youtube-feed-ready'))
       })
     }

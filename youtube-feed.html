@@ -390,11 +390,11 @@
     <div class="base">
       <div class="wrapper">
         <template is="dom-repeat" items="[[_videos]]">
-          <div id="video-[[item.id]]" style="background-image:url([[item.thumb.url]])" class="card">
+          <div id="video-[[item.id]]" class="card">
             <h2>[[item.title]]</h2>
             <p class="message">
-              <template is="dom-if" if="[[_computeShowPlayer(_clicked, item.id)]]">
-                <google-youtube video-id="[[item.id]]" height="270px" width="480px" rel="0" start="5">
+              <template is="dom-if" if="[[_computeShowPlayer(_clicked, item.id)]]" restamp>
+                <google-youtube video-id="[[item.id]]" height="270px" width="480px">
                 </google-youtube>
               </template>
             </p>

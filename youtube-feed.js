@@ -188,6 +188,15 @@ var youtubeFeed = function () {
       }, []);
     }
   }, {
+    key: '_setBackgroundImages',
+    value: function _setBackgroundImages() {
+      var _this3 = this;
+
+      this.querySelectorAll('.card').forEach(function (item, i) {
+        item.style.backgroundImage = 'url(' + _this3._videos[i].thumb.url + ')';
+      });
+    }
+  }, {
     key: '_computeVideoLink',
     value: function _computeVideoLink(videoId) {
       return 'https://www.youtube.com/watch?v=' + videoId;
@@ -205,11 +214,12 @@ var youtubeFeed = function () {
   }, {
     key: '_videosChanged',
     value: function _videosChanged(videos) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (videos.length > 0) {
         setTimeout(function () {
-          _this3.dispatchEvent(new CustomEvent('youtube-feed-ready'));
+          _this4._setBackgroundImages();
+          _this4.dispatchEvent(new CustomEvent('youtube-feed-ready'));
         });
       }
     }
