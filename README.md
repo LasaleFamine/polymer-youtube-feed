@@ -86,12 +86,14 @@ thumbDefinition: {
 
 #### .loadContent()
 Load (or reload) content with the current properties if needed.
+
 ---
 
 #### .showVideoPlay(videoId)
 ##### videoId
 Type: `string`  
 The video id related to the video you want to show.
+
 ---
 
 ### Events
