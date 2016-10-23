@@ -198,6 +198,7 @@
         -webkit-transform: translateX(-50%)translateY(-50%)scale(1) !important;
         -moz-transform: translateX(-50%)translateY(-50%)scale(1) !important;
         transform: translateX(-50%)translateY(-50%)scale(1) !important;
+        display: none;
       }
 
       .play.active {
@@ -394,7 +395,7 @@
             <h2>[[item.title]]</h2>
             <p class="message">
               <template is="dom-if" if="[[_computeShowPlayer(_clicked, item.id)]]" restamp>
-                <google-youtube video-id="[[item.id]]" height="270px" width="480px">
+                <google-youtube video-id="[[item.id]]" height="270px" width="480px" autoplay="1">
                 </google-youtube>
               </template>
             </p>
