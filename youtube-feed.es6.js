@@ -176,7 +176,7 @@ class youtubeFeed {
     }, [])
   }
 
-  _setBackgroundImages() {
+  _setBackgroundImages () {
     this.querySelectorAll('.card').forEach((item, i) => {
       item.style.backgroundImage = `url(${this._videos[i].thumb.url})`
     })
