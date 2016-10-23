@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- MAIN IMPORTS -->
+  <script src="./../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="./../../web-component-tester/browser.js"></script>
+
+
+  <link rel="import" href="./../../polymer/polymer.html">
+
+  <!-- COMPONENT TO TEST -->
+  <link rel="import" href="./../youtube-feed.html">
+</head>
+
+<body>
+
+  <test-fixture id="youtubeFeed">
+    <template>
+      <youtube-feed key="AIzaSyDSMFnkOImuTCIjgmE6gKe_TFKnMM_EyDE"></youtube-feed>
+    </template>
+  </test-fixture>
+
+
+  <script>
+    suite('<youtube-feed>', function() {
+      var youtubeFeed;
+
+      setup(function() {
+        youtubeFeed = fixture('youtubeFeed');
+      });
+
+      suite('Test Properties', function() {
+        test('Default Properties', function() {
+          assert.equal(youtubeFeed.key, 'AIzaSyDSMFnkOImuTCIjgmE6gKe_TFKnMM_EyDE', "Key is present on load");
+          assert.equal(youtubeFeed.order, "date", "order correct on load");
+          assert.equal(youtubeFeed.q, "Never Gonna Give You Up", "q correct on load");
+          assert.equal(youtubeFeed.safeSearch, 'moderate', "safeSearch moderate on load");
+          assert.equal(youtubeFeed.videoDefinition, 'any', 'video definition any on load')
+          assert.equal(youtubeFeed.thumbDefinition, 'high', 'thumb definition high on load')
+          assert.isArray(youtubeFeed._videos, 'videos is array on load')
+          assert.equal(youtubeFeed._type, 'video', 'type video on load')
+          assert.equal(youtubeFeed._endpoint, 'https://www.googleapis.com/youtube/v3/search?part=snippet', 'endpoint correct on load')
+        });
+
+        test('Working with default props', function(done) {
+          setTimeout(function() {
+            var feeds = youtubeFeed.querySelectorAll('.card');
+            assert.lengthOf(feeds, 5, '5 feeds load correclty');
+            done();
+          }, 500)
+        });
+
+        test('Reload after changin q prop', function(done) {
+          youtubeFeed.q = 'PolymerProject'
+          setTimeout(function() {
+            var feed = youtubeFeed.querySelector('.card h2');
+            assert.include(feed.innerHTML, 'Polymer', 'change q prop working');
+            done();
+          }, 500)
+        });
+
+        test('Reload after changin order prop', function(done) {
+          setTimeout(function() {
+            var feed = youtubeFeed.querySelector('.card h2');
+            var feedTitle = feed.innerHTML;
+            youtubeFeed.order = 'title'
+            setTimeout(function() {
+              assert.notEqual(feed.innerHTML, feedTitle, 'change order prop working');
+              done();
+            }, 500)
+          }, 500)
+        });
+      });
+
+      suite('Test Events', function() {
+        test('Check on-youtube-feed-ready', function(done) {
+          youtubeFeed.addEventListener('youtube-feed-ready', function() {
+            var feeds = youtubeFeed.querySelectorAll('.card');
+            assert.lengthOf(feeds, 5, '5 feeds load correclty');
+            done();
+          })
+        });
+      });
+
+      suite('Test Methods', function() {
+        test('Check loadContent()', function(done) {
+          setTimeout(function () {
+            var firstVideoWidth = youtubeFeed._videos[0].thumb.width;
+            youtubeFeed.thumbDefinition = 'medium';
+            youtubeFeed.loadContent();
+            setTimeout(function () {
+              assert.notEqual(youtubeFeed._videos[0].thumb.width, firstVideoWidth, 'Changing thumb and reload correct')
+              done();
+            }, 300)
+          }, 500)
+
+          })
+
+        test('Check showVideoPlay()', function(done) {
+          youtubeFeed.addEventListener('youtube-feed-ready', function() {
+            var feedId = youtubeFeed.querySelector('.card').id.replace('video-', '');
+
+            youtubeFeed.showVideoPlay(feedId);
+
+            setTimeout(function () {
+              var circle1 = youtubeFeed.querySelector('#video-' + feedId + ' .circle-1');
+              var circle2 = youtubeFeed.querySelector('#video-' + feedId + ' .circle-2');
+              assert.isTrue(circle1.classList.contains('active'), 'circle1 contains active');
+              assert.isTrue(circle2.classList.contains('active'), 'circle2 contains active');
+              done();
+            }, 200)
+
+          })
+        });
+      });
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!-- <link rel="import" href="../../polymer/polymer.html"> -->
+<link rel="import" href="../youtube-feed.html">
+
+<dom-module id="demo-page">
+    <template>
+        <style>
+          .container {
+            display: flex;
+            flex-direction: row;
+          }
+          .item {
+            flex: 2; /* default 0 */
+          }
+        </style>
+        <h3>Basic youtube-feed demo</h3>
+        <div class="container">
+            <div class="item">
+              <youtube-feed q="[[search]]" key="[[key]]" id="one"></youtube-feed>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "demo-page",
+            properties: {
+              key: {
+                type: String,
+                value: 'AIzaSyDSMFnkOImuTCIjgmE6gKe_TFKnMM_EyDE'
+              },
+              search: {
+                type: String,
+                value: 'PolymerProject'
+              }
+            }
+        });
+    </script>
+</dom-module>

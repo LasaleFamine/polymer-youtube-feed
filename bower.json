@@ -1,0 +1,32 @@
+{
+  "name": "polymer-youtube-feed",
+  "main": "youtube-feed.js",
+  "version": "0.1.0",
+  "authors": [
+    "LasaleFamine <info@godev.space>"
+  ],
+  "description": "olymer (ES6) wrapper of YouTube APIs as video feeds",
+  "keywords": [
+    "youtube",
+    "feed",
+    "polymer",
+    "es6",
+    "element",
+    "webcomponent"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/LasaleFamine/polymer-youtube-feed#readme",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.0",
+    "fetch": "^1.0.0",
+    "es6-promise": "^4.0.5",
+    "google-youtube": "GoogleWebComponents/google-youtube#^1.2.1"
+  }
+}
