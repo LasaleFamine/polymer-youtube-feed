@@ -1,6 +1,6 @@
 {
   "name": "polymer-youtube-feed",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Polymer (ES6) wrapper of YouTube APIs as video feeds",
   "main": "youtube-feed.js",
   "repository": {
