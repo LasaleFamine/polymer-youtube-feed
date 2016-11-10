@@ -36,6 +36,13 @@ class youtubeFeed {
         value: 'Never Gonna Give You Up'
       },
       /**
+       * Number of results
+       */
+      maxResults: {
+        type: Number,
+        value: 5
+      },
+      /**
        * Safe search for explicit content or standard content
        * (moderate|none|strict)
        */
@@ -93,7 +100,9 @@ class youtubeFeed {
   }
 
   attached () {
-    this.loadContent()
+    setTimeout(() => {
+      this.loadContent()
+    }, 50)
   }
 
   loadContent () {
@@ -150,7 +159,7 @@ class youtubeFeed {
 
   _loadContent () {
     let resource = this._endpoint
-    let query = `&order=${this.order}&q=${this.q}&safeSearch=${this.safeSearch}&type=${this._type}&videoDefinition=${this.videoDefinition}&key=${this.key}`
+    let query = `&order=${this.order}&maxResults=${this.maxResults}&q=${this.q}&safeSearch=${this.safeSearch}&type=${this._type}&videoDefinition=${this.videoDefinition}&key=${this.key}`
 
     resource += query
     return fetch(resource)

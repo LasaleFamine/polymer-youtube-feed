@@ -4794,9 +4794,9 @@ temp@^0.8.1:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
 
-"test-fixture@github:polymerelements/test-fixture":
+test-fixture@PolymerElements/test-fixture:
   version "1.1.1"
-  resolved "https://codeload.github.com/polymerelements/test-fixture/tar.gz/05514d6f32ade6fe54de5b242bbb43ea9dcff3c0"
+  resolved "https://codeload.github.com/PolymerElements/test-fixture/tar.gz/a0d9d6d1fedfdbc715e244ffc6116021256788fe"
 
 text-table@~0.2.0:
   version "0.2.0"

@@ -56,6 +56,13 @@ q: {
   value: 'Never Gonna Give You Up'
 },
 /**
+ * Number of results
+ */
+maxResults: {
+  type: Number,
+  value: 5
+},
+/**
  * Safe search for explicit content or standard content
  * (moderate|none|strict)
  */
