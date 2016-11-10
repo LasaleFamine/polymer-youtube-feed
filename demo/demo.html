@@ -15,7 +15,7 @@
         <h3>Basic youtube-feed demo</h3>
         <div class="container">
             <div class="item">
-              <youtube-feed q="[[search]]" key="[[key]]" id="one"></youtube-feed>
+              <youtube-feed q="[[search]]" key="[[key]]" max-results="[[results]]" id="one"></youtube-feed>
             </div>
         </div>
     </template>
@@ -30,6 +30,10 @@
               search: {
                 type: String,
                 value: 'PolymerProject'
+              },
+              results: {
+                type: Number,
+                value: 10
               }
             }
         });

@@ -42,6 +42,13 @@ var youtubeFeed = function () {
           value: 'Never Gonna Give You Up'
         },
         /**
+         * Number of results
+         */
+        maxResults: {
+          type: Number,
+          value: 5
+        },
+        /**
          * Safe search for explicit content or standard content
          * (moderate|none|strict)
          */
@@ -98,15 +105,19 @@ var youtubeFeed = function () {
   }, {
     key: 'attached',
     value: function attached() {
-      this.loadContent();
+      var _this = this;
+
+      setTimeout(function () {
+        _this.loadContent();
+      }, 50);
     }
   }, {
     key: 'loadContent',
     value: function loadContent() {
-      var _this = this;
+      var _this2 = this;
 
       this._loadContent().then(function (res) {
-        _this.set('_videos', _this._makeItems(res));
+        _this2.set('_videos', _this2._makeItems(res));
       }).catch(function (err) {
         throw new Error(err);
       });
@@ -161,7 +172,7 @@ var youtubeFeed = function () {
     key: '_loadContent',
     value: function _loadContent() {
       var resource = this._endpoint;
-      var query = '&order=' + this.order + '&q=' + this.q + '&safeSearch=' + this.safeSearch + '&type=' + this._type + '&videoDefinition=' + this.videoDefinition + '&key=' + this.key;
+      var query = '&order=' + this.order + '&maxResults=' + this.maxResults + '&q=' + this.q + '&safeSearch=' + this.safeSearch + '&type=' + this._type + '&videoDefinition=' + this.videoDefinition + '&key=' + this.key;
 
       resource += query;
       return fetch(resource).then(function (res) {
@@ -173,7 +184,7 @@ var youtubeFeed = function () {
   }, {
     key: '_makeItems',
     value: function _makeItems(res) {
-      var _this2 = this;
+      var _this3 = this;
 
       return res.items.reduce(function (acc, item) {
         var singleItem = {
@@ -182,7 +193,7 @@ var youtubeFeed = function () {
           description: item.snippet.description,
           channelTitle: item.snippet.channelTitle,
           pubDate: item.snippet.publishedAt,
-          thumb: item.snippet.thumbnails['' + _this2.thumbDefinition]
+          thumb: item.snippet.thumbnails['' + _this3.thumbDefinition]
         };
         return acc.concat(singleItem);
       }, []);
@@ -190,10 +201,10 @@ var youtubeFeed = function () {
   }, {
     key: '_setBackgroundImages',
     value: function _setBackgroundImages() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.querySelectorAll('.card').forEach(function (item, i) {
-        item.style.backgroundImage = 'url(' + _this3._videos[i].thumb.url + ')';
+        item.style.backgroundImage = 'url(' + _this4._videos[i].thumb.url + ')';
       });
     }
   }, {
@@ -214,12 +225,12 @@ var youtubeFeed = function () {
   }, {
     key: '_videosChanged',
     value: function _videosChanged(videos) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (videos.length > 0) {
         setTimeout(function () {
-          _this4._setBackgroundImages();
-          _this4.dispatchEvent(new CustomEvent('youtube-feed-ready'));
+          _this5._setBackgroundImages();
+          _this5.dispatchEvent(new CustomEvent('youtube-feed-ready'));
         });
       }
     }

@@ -19,7 +19,8 @@
 
   <test-fixture id="youtubeFeed">
     <template>
-      <youtube-feed key="AIzaSyDSMFnkOImuTCIjgmE6gKe_TFKnMM_EyDE"></youtube-feed>
+      <youtube-feed
+       key="AIzaSyDSMFnkOImuTCIjgmE6gKe_TFKnMM_EyDE"></youtube-feed>
     </template>
   </test-fixture>
 
@@ -52,6 +53,16 @@
             done();
           }, 500)
         });
+
+        test('Changing max results', function(done) {
+          youtubeFeed.maxResults = 10;
+          setTimeout(function() {
+            var feeds = youtubeFeed.querySelectorAll('.card');
+            assert.lengthOf(feeds, 10, '10 feeds load correclty after changing the maxResults property');
+            done();
+          }, 500)
+        });
+
 
         test('Reload after changin q prop', function(done) {
           youtubeFeed.q = 'PolymerProject'
