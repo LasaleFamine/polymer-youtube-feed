@@ -28,6 +28,7 @@
   <script>
     suite('<youtube-feed>', function() {
       var youtubeFeed;
+			var timeout = 4000;
 
       setup(function() {
         youtubeFeed = fixture('youtubeFeed');
@@ -51,7 +52,7 @@
             var feeds = youtubeFeed.querySelectorAll('.card');
             assert.lengthOf(feeds, 5, '5 feeds load correclty');
             done();
-          }, 500)
+          }, timeout)
         });
 
         test('Changing max results', function(done) {
@@ -60,7 +61,7 @@
             var feeds = youtubeFeed.querySelectorAll('.card');
             assert.lengthOf(feeds, 10, '10 feeds load correclty after changing the maxResults property');
             done();
-          }, 500)
+          }, timeout)
         });
 
 
@@ -70,7 +71,7 @@
             var feed = youtubeFeed.querySelector('.card h2');
             assert.include(feed.innerHTML, 'Polymer', 'change q prop working');
             done();
-          }, 500)
+          }, timeout)
         });
 
         test('Reload after changin order prop', function(done) {
